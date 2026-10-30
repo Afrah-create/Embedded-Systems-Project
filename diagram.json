@@ -1,0 +1,205 @@
+{
+  "version": 1,
+  "author": "Awongo Fahadi Rashid",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "board-esp32-devkit-c-v4", "id": "esp", "top": 0, "left": 200, "attrs": {} },
+    {
+      "type": "board-mfrc522",
+      "id": "rfid_in",
+      "top": -220,
+      "left": -20,
+      "attrs": { "uid": "01:02:03:04" }
+    },
+    {
+      "type": "board-mfrc522",
+      "id": "rfid_out",
+      "top": -220,
+      "left": 520,
+      "attrs": { "uid": "01:02:03:04" }
+    },
+    {
+      "type": "wokwi-servo",
+      "id": "servo_in",
+      "top": 380,
+      "left": -40,
+      "attrs": { "horn": "single" }
+    },
+    {
+      "type": "wokwi-servo",
+      "id": "servo_out",
+      "top": 380,
+      "left": 460,
+      "attrs": { "horn": "single" }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led_in_g",
+      "top": 20,
+      "left": -80,
+      "attrs": { "color": "green", "label": "IN OK" }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led_in_r",
+      "top": 80,
+      "left": -80,
+      "attrs": { "color": "red", "label": "IN NO" }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led_out_g",
+      "top": 20,
+      "left": 620,
+      "attrs": { "color": "green", "label": "OUT OK" }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led_out_r",
+      "top": 80,
+      "left": 620,
+      "attrs": { "color": "red", "label": "OUT NO" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r_in_g",
+      "top": 30,
+      "left": 20,
+      "attrs": { "value": "220" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r_in_r",
+      "top": 90,
+      "left": 20,
+      "attrs": { "value": "220" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r_out_g",
+      "top": 30,
+      "left": 520,
+      "attrs": { "value": "220" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r_out_r",
+      "top": 90,
+      "left": 520,
+      "attrs": { "value": "220" }
+    },
+    {
+      "type": "wokwi-buzzer",
+      "id": "bz1",
+      "top": 300,
+      "left": 280,
+      "attrs": { "mode": "smooth" }
+    },
+    { "type": "wokwi-microsd-card", "id": "sd1", "top": -180, "left": -340, "attrs": {} },
+    { "type": "wokwi-membrane-keypad", "id": "keypad1", "top": 516.4, "left": 159.2, "attrs": {} },
+    {
+      "type": "wokwi-resistor",
+      "id": "r_c1",
+      "top": 470,
+      "left": 40,
+      "attrs": { "value": "10000" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r_c2",
+      "top": 470,
+      "left": 140,
+      "attrs": { "value": "10000" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r_c3",
+      "top": 470,
+      "left": 240,
+      "attrs": { "value": "10000" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r_c4",
+      "top": 470,
+      "left": 340,
+      "attrs": { "value": "10000" }
+    },
+    {
+      "type": "wokwi-text",
+      "id": "labelSd",
+      "top": -250,
+      "left": -340,
+      "attrs": { "text": "SD card (CS = GPIO 4)" }
+    },
+    {
+      "type": "wokwi-text",
+      "id": "labelKeypad",
+      "top": 490,
+      "left": 160,
+      "attrs": { "text": "Menu keypad" }
+    }
+  ],
+  "connections": [
+    [ "esp:TX", "$serialMonitor:RX", "", [] ],
+    [ "esp:RX", "$serialMonitor:TX", "", [] ],
+    [ "rfid_in:3.3V", "esp:3V3", "red", [] ],
+    [ "rfid_in:GND", "esp:GND.1", "black", [] ],
+    [ "rfid_in:RST", "esp:21", "yellow", [] ],
+    [ "rfid_in:SDA", "esp:5", "orange", [] ],
+    [ "rfid_in:SCK", "esp:18", "purple", [] ],
+    [ "rfid_in:MOSI", "esp:23", "green", [] ],
+    [ "rfid_in:MISO", "esp:19", "blue", [] ],
+    [ "rfid_out:3.3V", "esp:3V3", "red", [] ],
+    [ "rfid_out:GND", "esp:GND.1", "black", [] ],
+    [ "rfid_out:RST", "esp:17", "yellow", [] ],
+    [ "rfid_out:SDA", "esp:16", "orange", [] ],
+    [ "rfid_out:SCK", "esp:18", "purple", [] ],
+    [ "rfid_out:MOSI", "esp:23", "green", [] ],
+    [ "rfid_out:MISO", "esp:19", "blue", [] ],
+    [ "servo_in:PWM", "esp:13", "green", [] ],
+    [ "servo_in:V+", "esp:5V", "red", [] ],
+    [ "servo_in:GND", "esp:GND.2", "black", [ "h385.6", "v-401.2" ] ],
+    [ "servo_out:PWM", "esp:25", "green", [] ],
+    [ "servo_out:V+", "esp:5V", "red", [] ],
+    [ "servo_out:GND", "esp:GND.2", "black", [ "h-114.4", "v-401.2" ] ],
+    [ "esp:26", "r_in_g:1", "green", [] ],
+    [ "r_in_g:2", "led_in_g:A", "green", [ "v-35.65", "h-107.6", "v62" ] ],
+    [ "led_in_g:C", "esp:GND.2", "black", [ "v14.8", "h365.76" ] ],
+    [ "esp:32", "r_in_r:1", "red", [] ],
+    [ "r_in_r:2", "led_in_r:A", "red", [] ],
+    [ "led_in_r:C", "esp:GND.2", "black", [ "v89.2", "h458.6", "v-230.4", "h-86.4", "v48" ] ],
+    [ "esp:33", "r_out_g:1", "green", [] ],
+    [ "r_out_g:2", "led_out_g:A", "green", [] ],
+    [ "led_out_g:C", "esp:GND.3", "black", [] ],
+    [ "esp:14", "r_out_r:1", "red", [] ],
+    [ "r_out_r:2", "led_out_r:A", "red", [] ],
+    [ "led_out_r:C", "esp:GND.3", "black", [ "h-289.4", "v-35.6" ] ],
+    [ "bz1:1", "esp:GND.1", "black", [] ],
+    [ "bz1:2", "esp:27", "orange", [] ],
+    [ "sd1:VCC", "esp:3V3", "red", [] ],
+    [ "sd1:GND", "esp:GND.1", "black", [ "v132.34", "h416.87", "v172.8" ] ],
+    [ "esp:18", "sd1:SCK", "purple", [ "h-502.36", "v-247.42" ] ],
+    [ "esp:23", "sd1:DI", "green", [ "h64.04", "v-96", "h-556.8", "v-64.94" ] ],
+    [ "esp:19", "sd1:DO", "blue", [ "h-425.56", "v-257.14" ] ],
+    [ "esp:4", "sd1:CS", "brown", [ "h-454.36", "v-257.09" ] ],
+    [ "keypad1:R1", "esp:22", "green", [] ],
+    [ "keypad1:R2", "esp:15", "green", [] ],
+    [ "keypad1:R3", "esp:2", "green", [] ],
+    [ "keypad1:R4", "esp:0", "green", [] ],
+    [ "keypad1:C1", "esp:34", "yellow", [] ],
+    [ "keypad1:C2", "esp:35", "yellow", [] ],
+    [ "keypad1:C3", "esp:VP", "yellow", [ "v19.2", "h-134.55", "v-825.6" ] ],
+    [ "keypad1:C4", "esp:VN", "yellow", [ "v34.8", "h-122.89" ] ],
+    [ "esp:3V3", "r_c1:1", "red", [] ],
+    [ "r_c1:2", "esp:34", "red", [] ],
+    [ "esp:3V3", "r_c2:1", "red", [] ],
+    [ "r_c2:2", "esp:35", "red", [] ],
+    [ "esp:3V3", "r_c3:1", "red", [] ],
+    [ "r_c3:2", "esp:VP", "red", [] ],
+    [ "esp:3V3", "r_c4:1", "red", [] ],
+    [ "r_c4:2", "esp:VN", "red", [] ]
+  ],
+  "serialMonitor": { "convertEol": true, "display": "terminal", "newline": "lf" },
+  "dependencies": {}
+}
