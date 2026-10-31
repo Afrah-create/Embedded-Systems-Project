@@ -86,6 +86,10 @@ void storage_set_building_open(int open);
 void storage_set_emergency(int on);
 void storage_log(int seconds, char *door, char *name, char *uid, char *result);
 
+void lighting_start(void);
+void lighting_motion(int room);
+void lighting_print_status(void);
+
 static spi_device_handle_t entry_reader;
 static spi_device_handle_t exit_reader;
 static SemaphoreHandle_t beep_lock;
@@ -728,6 +732,9 @@ static void show_main_menu(void)
     printf("  3  Access log\n");
     printf("  4  Registered cards\n");
     printf("  5  Admin\n");
+    printf("  A  Room 1 motion\n");
+    printf("  B  Room 2 motion\n");
+    printf("  C  Room lighting status\n");
     printf("Press a number. * shows this menu again.\n");
     fflush(stdout);
 }
@@ -832,6 +839,19 @@ static void menu_task(void *arg)
 
         key = wait_key();
         printf("Key %c\n", key);
+
+        if (key == 'A') {
+            lighting_motion(0);
+            continue;
+        }
+        if (key == 'B') {
+            lighting_motion(1);
+            continue;
+        }
+        if (key == 'C') {
+            lighting_print_status();
+            continue;
+        }
 
         if (mode == 2) {
             if (key == '*') {
@@ -1019,6 +1039,7 @@ void app_main(void)
     capture_lock = xSemaphoreCreateMutex();
     capture_uid[0] = '\0';
 
+    lighting_start();
     start_keypad();
     start_doors_and_leds();
     spi_bus_init();

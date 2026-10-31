@@ -95,6 +95,34 @@
       "left": 280,
       "attrs": { "mode": "smooth" }
     },
+    {
+      "type": "wokwi-led",
+      "id": "room1_light",
+      "top": 300,
+      "left": -160,
+      "attrs": { "color": "yellow", "label": "ROOM 1 LIGHT" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r_room1",
+      "top": 310,
+      "left": -40,
+      "attrs": { "value": "220" }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "room2_light",
+      "top": 300,
+      "left": 700,
+      "attrs": { "color": "yellow", "label": "ROOM 2 LIGHT" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r_room2",
+      "top": 310,
+      "left": 580,
+      "attrs": { "value": "220" }
+    },
     { "type": "wokwi-microsd-card", "id": "sd1", "top": -180, "left": -340, "attrs": {} },
     { "type": "wokwi-membrane-keypad", "id": "keypad1", "top": 516.4, "left": 159.2, "attrs": {} },
     {
@@ -142,7 +170,6 @@
   ],
   "connections": [
     [ "esp:TX", "$serialMonitor:RX", "", [] ],
-    [ "esp:RX", "$serialMonitor:TX", "", [] ],
     [ "rfid_in:3.3V", "esp:3V3", "red", [] ],
     [ "rfid_in:GND", "esp:GND.1", "black", [] ],
     [ "rfid_in:RST", "esp:21", "yellow", [] ],
@@ -177,6 +204,12 @@
     [ "led_out_r:C", "esp:GND.3", "black", [ "h-289.4", "v-35.6" ] ],
     [ "bz1:1", "esp:GND.1", "black", [] ],
     [ "bz1:2", "esp:27", "orange", [] ],
+    [ "esp:12", "r_room1:1", "yellow", [] ],
+    [ "r_room1:2", "room1_light:A", "yellow", [] ],
+    [ "room1_light:C", "esp:GND.2", "black", [] ],
+    [ "esp:RX", "r_room2:1", "yellow", [] ],
+    [ "r_room2:2", "room2_light:A", "yellow", [] ],
+    [ "room2_light:C", "esp:GND.3", "black", [] ],
     [ "sd1:VCC", "esp:3V3", "red", [] ],
     [ "sd1:GND", "esp:GND.1", "black", [ "v132.34", "h416.87", "v172.8" ] ],
     [ "esp:18", "sd1:SCK", "purple", [ "h-502.36", "v-247.42" ] ],
